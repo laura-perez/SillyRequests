@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SillyRequests.Models.Request>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="jumbotron">
+    <h3>At Equilibrium we are often asked to perform illogical tasks and asked questions that are just silly. </h3>
+    <h3>Here we keep a record of these silly or obscure requests.</h3>
+</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Question)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OccurenceDate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.OrderByDescending(r => r.OccurenceDate))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question)
+                </td>
+                <td>
+                    @item.OccurenceDate.ToShortDateString()
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
